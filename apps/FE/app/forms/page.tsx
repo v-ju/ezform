@@ -9,14 +9,13 @@ export default function Form(){
             <div className="w-full h-12 ">
                 
             </div>
-            <div className="w-full h- h-full top-24 bg-blue-200">
+            <div className="w-full h-full top-24 ">
                 <div className="h-40 bg-amber-200">
 
                 </div>
                 <div className="w-full">                    
                     <div className="mx-auto w-225">
-                        <div className="px-24">   
-                                                    
+                        <div className="px-24">                             
                             <div className="pb-10 group bg-pink-100 text-5xl">                               
                                 <div className="relative ">
                                     <div className="hidden group-hover:block absolute -top-7 "> 
@@ -28,12 +27,11 @@ export default function Form(){
                                     </div> 
                                     <input placeholder="Form Title" className="border-0 outline-0 font-extrabold text-gray-600 w-full"/>                                     
                                 </div>                                
-                            </div>
-                            
+                            </div>                            
                         </div>
-                        <div className="">
-                            <Tiptap/>                            
-                        </div>
+                        
+                        <Tiptap/>                            
+                        
                     </div>
                 </div>
             </div>

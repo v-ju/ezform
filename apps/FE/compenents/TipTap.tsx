@@ -3,31 +3,41 @@
 import { useEditor, EditorContent, } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Placeholder } from '@tiptap/extensions/placeholder'
-import OptionsButton from './OptionsButton'
-import { LucideGripVertical, LucidePlus, Trash2Icon } from 'lucide-react'
+import { CustomParagraph } from '@/extensions/componentExtended'
+import { Document } from '@tiptap/extension-document'
+
+
+
+const CustomDocument = Document.extend({
+  content: 'custom-paragraph block*',
+})
+
 
 const Tiptap = () => {
   const editor = useEditor({
-    extensions: [StarterKit,
-        Placeholder.configure({
-            placeholder : 'Type "/" to insert block',
-            showOnlyWhenEditable: true,
-        })
+    extensions: [StarterKit.configure({ document: false, paragraph: false}),
+      CustomDocument,
+      CustomParagraph,
+      Placeholder.configure({
+          placeholder : ({ node }) => {
+            if (node.type.name === 'custom-paragraph' && node.content.size === 0) {
+              return 'Type "/" to insert block';
+            }
+            return '';
+          },
+          showOnlyWhenEditable: true,
+      }),
+        
     ],
     content:"",
     immediatelyRender: false,
     
   })
 
-  return <EditorContent editor={editor} className='py-2 text-md bg-pink-600 leading-7 px-24 relative group'>
-    <div className='hidden group-hover:block group-focus-within:block'>
-      <div className="flex absolute left-3 mx-1 ">
-          <OptionsButton buttonImage={<Trash2Icon size={17} color='gray'/>}/>
-          <OptionsButton buttonImage={<LucidePlus size={17} color='gray'/>}/>
-          <OptionsButton buttonImage={<LucideGripVertical size={17} color='gray'/>}/>
-      </div>
-    </div>
+  return <EditorContent editor={editor} className='py-2 text-md leading-7 px-24 ' > 
+    
   </EditorContent>
+
 }
 
 export default Tiptap
